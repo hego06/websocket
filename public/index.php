@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+
+define('ENVIRONMENT', 'MODUNO');
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

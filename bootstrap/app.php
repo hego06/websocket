@@ -52,4 +52,34 @@ $app->singleton(
 |
 */
 
+if(defined('ENVIRONMENT'))
+{
+    switch(ENVIRONMENT)
+    {
+        case 'MODUNO':
+            $app->group(['namespace' => 'App\Http\Controllers'], function ($app){
+                require _DIR_.'../routes/modulouno.php';
+            });
+        break;
+
+        case 'MODULODOS':
+            $app->group(['namespace' => 'App\Http\Controllers'], function ($app){
+                require _DIR_.'/../routes/modulodos.php';
+            });
+        break;
+
+        default:
+            $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+                require __DIR__.'/../routes/web.php';
+            });
+        break;
+    }
+}
+else
+{
+    $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+        require __DIR__.'/../routes/web.php';
+    });
+}
+
 return $app;
